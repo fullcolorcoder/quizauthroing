@@ -1,0 +1,322 @@
+// import CustomConnectionLine from './CustomConnectionLine';
+// import FloatingEdge from './FloatingEdge';
+// import { MarkerType } from 'reactflow';
+// import OptionNode from './OptionNode';
+
+
+
+// ALmost there
+
+// import React, { useCallback, useRef, useState } from 'react';
+// import ReactFlow, {
+//   addEdge,
+//   useNodesState,
+//   useEdgesState,
+//   useReactFlow,
+//   ReactFlowProvider,
+//   Background,
+//   Controls,
+// } from 'reactflow';
+// import QuestionNode from './QuestionNode';
+// import OptionNode from './OptionNode';
+// import CustomConnectionLine from './CustomConnectionLine';
+// import FloatingEdge from './FloatingEdge';
+// import { MarkerType } from 'reactflow';
+
+// const nodeTypes = {
+//   question: QuestionNode,
+//   option: OptionNode,
+// };
+
+// const edgeTypes = {
+//     floating: FloatingEdge,
+//   };
+
+
+// const connectionLineStyle = {
+// strokeWidth: 3,
+// stroke: 'black',
+// };
+
+// const defaultEdgeOptions = {
+//     style: { strokeWidth: 3, stroke: 'black' },
+//     type: 'floating',
+//     markerEnd: {
+//         type: MarkerType.ArrowClosed,
+//         color: 'black',
+//     },
+// };  
+
+// let id = 1;
+// const getId = () => `node${id++}`;
+
+// const QuizEditor = () => {
+//   const reactFlowWrapper = useRef(null);
+//   const connectingNodeId = useRef(null);
+//   const [nodes, setNodes] = useNodesState([]);
+//   const [edges, setEdges] = useEdgesState([]);
+
+//   const { project } = useReactFlow();
+
+//   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
+
+//   const onConnectStart = useCallback((_, { nodeId }) => {
+//     connectingNodeId.current = nodeId;
+//   }, []);
+
+//   const onConnectEnd = useCallback(
+//     (event) => {
+//       const targetIsPane = event.target.classList.contains('react-flow__pane');
+  
+//       if (targetIsPane) {
+//         // we need to remove the wrapper bounds, in order to get the correct position
+//         const { top, left } = reactFlowWrapper.current.getBoundingClientRect();
+//         const id = getId();
+//         const newNode = {
+//           id,
+//           type: 'option', // specify the type as 'option'
+//           data: { label: `Option ${id}` },
+//           position: project({ x: event.clientX - left - 75, y: event.clientY - top }),
+//         };
+  
+//         setNodes((nds) => nds.concat(newNode));
+//         setEdges((eds) => eds.concat({ id, source: connectingNodeId.current, target: id }));
+//       }
+//     },
+//     [project]
+//   );
+
+//   const addQuestion = () => {
+//     const newId = getId();
+//     const newNode = {
+//       id: newId,
+//       type: 'question',
+//       data: { label: `Question ${newId}`, product1: '', product2: '' },
+//       position: { x: id * 250, y: 100 },
+//     };
+
+//     setNodes((nds) => nds.concat(newNode));
+//   };
+
+//   const exportData = () => {
+//     const quiz = nodes
+//       .filter((el) => el.type === 'question')
+//       .map((el) => ({
+//         question: el.data.label,
+//         product1: el.data.product1,
+//         product2: el.data.product2,
+//       }));
+//     const json = JSON.stringify(quiz, null, 2);
+//     console.log(json);
+//   };
+//   const onNodesChange = useCallback((newNodes) => {
+//     setNodes(newNodes);
+//   }, []);
+  
+//   const onEdgesChange = useCallback((newEdges) => {
+//     setEdges(newEdges);
+//   }, []);
+
+//   return (
+//     <div className="wrapper" ref={reactFlowWrapper} style={{ height: '90vh' }}>
+//       <button onClick={addQuestion}>Add Question</button>
+//       <button onClick={exportData}>Export Quiz</button>
+//       <ReactFlow
+//         nodes={nodes}
+//         edges={edges}
+//         onNodesChange={onNodesChange}
+//         onEdgesChange={onEdgesChange}
+//         onConnect={onConnect}
+//         fitView
+//         nodeTypes={nodeTypes}
+//         edgeTypes={edgeTypes}
+//         defaultEdgeOptions={defaultEdgeOptions}
+//         connectionLineComponent={CustomConnectionLine}
+//         connectionLineStyle={connectionLineStyle}
+//       >
+//         <Background color="#aaa" gap={20} />
+//         <Controls />
+//       </ReactFlow>
+//     </div>
+//   );
+// };
+
+// export default () => (
+//   <ReactFlowProvider>
+//     <QuizEditor />
+//   </ReactFlowProvider>
+// );
+
+
+
+// // THIS VERSION WORKS. THANK YOU. 
+// import React, { useState } from 'react';
+// import ReactFlow, { addEdge, Controls, Background } from 'reactflow';
+// import QuestionNode from './QuestionNode';
+
+// const nodeTypes = {
+//   question: QuestionNode,
+// };
+
+// function QuizEditor() {
+//   const [nodes, setNodes] = useState([]);
+//   const [edges, setEdges] = useState([]);
+//   const [nextNodeId, setNextNodeId] = useState(1);
+
+//   const addQuestion = () => {
+//     console.log('adding question');
+//     const newNodes = [
+//       ...nodes,
+//       {
+//         id: `node${nextNodeId}`,
+//         type: 'question',
+//         data: { label: `Question ${nextNodeId}`, product1: '', product2: '' },
+//         position: { x: nextNodeId * 500, y: 100 },
+//       },
+//     ];
+//     setNodes(newNodes);
+//     setNextNodeId(nextNodeId + 1);
+//   };
+
+//   const onConnect = (params) => setEdges((els) => addEdge(params, els));
+
+//   const exportData = () => {
+//     console.log('exporting data');
+//     const quiz = nodes
+//       .filter((el) => el.type === 'question')
+//       .map((el) => ({
+//         question: el.data.label,
+//         product1: el.data.product1,
+//         product2: el.data.product2,
+//       }));
+//     const json = JSON.stringify(quiz, null, 2);
+//     console.log(json);
+//   };
+
+//   return (
+//     <div style={{ height: '90vh' }}>
+//       <button onClick={addQuestion}>Add Question</button>
+//       <button onClick={exportData}>Export Quiz</button>
+//       <ReactFlow nodes={nodes} edges={edges} nodeTypes={nodeTypes}>
+//         <Background color="#aaa" gap={20} />
+//         <Controls />
+//       </ReactFlow>
+//     </div>
+//   );
+// }
+
+// export default QuizEditor;
+
+
+
+
+
+
+
+// Works with inputs
+//   return (
+//     <div className="wrapper" ref={reactFlowWrapper} style={{ height: '90vh' }}>
+//       <button onClick={addQuestion}>Add Question</button>
+//       <button onClick={exportData}>Export Quiz</button>
+//       <ReactFlow
+//         nodes={nodes}
+//         edges={edges}
+//         onEdgesChange={onEdgesChange}
+//         nodeTypes={nodeTypes}
+//         onConnect={onConnect}
+//         onConnectStart={onConnectStart}
+//         onConnectEnd={onConnectEnd}
+//         elementsSelectable={true} // This prop ensures that nodes are selectable
+//       >
+//         <Background color="#aaa" gap={20} />
+//         <Controls />
+//       </ReactFlow>
+//     </div>
+//   );
+
+
+// <div className="spectrum-Accordion spectrum-Accordion--compact spectrum-Accordion--sizeS" role="region">
+        //     <div className="spectrum-Accordion-item" role="presentation">
+        //         <h3 className="spectrum-Accordion-itemHeading">
+        //             <button className="spectrum-Accordion-itemHeader" type="button" id="spectrum-accordion-item-0-header" aria-controls="spectrum-accordion-item-0-content" aria-expanded="true">Recent</button>
+        //             <span className="spectrum-Accordion-itemIconContainer">
+        //                 <svg className="spectrum-Icon spectrum-UIIcon-ChevronRight75 spectrum-Accordion-itemIndicator" focusable="false" aria-hidden="true">
+        //                     <use xlinkHref="#spectrum-css-icon-Chevron75" />
+        //                 </svg>
+        //             </span>
+        //         </h3>
+        //         <div className="spectrum-Accordion-itemContent" role="region" id="spectrum-accordion-item-0-content" aria-labelledby="spectrum-accordion-item-0-header">Item 1</div>
+        //     </div>
+        //     <div className="spectrum-Accordion-item" role="presentation">
+        //         <h3 className="spectrum-Accordion-itemHeading">
+        //             <button className="spectrum-Accordion-itemHeader" type="button" disabled id="spectrum-accordion-item-1-header" aria-controls="spectrum-accordion-item-1-content" aria-expanded="false">Architecture</button>
+        //             <span className="spectrum-Accordion-itemIconContainer">
+        //                 <svg className="spectrum-Icon spectrum-UIIcon-ChevronRight75 spectrum-Accordion-itemIndicator" focusable="false" aria-hidden="true">
+        //                     <use xlinkHref="#spectrum-css-icon-Chevron75" />
+        //                 </svg>
+        //             </span>
+        //         </h3>
+        //         <div className="spectrum-Accordion-itemContent" role="region" id="spectrum-accordion-item-1-content" aria-labelledby="spectrum-accordion-item-1-header">Item 2</div>
+        //     </div>
+        //     <div className="spectrum-Accordion-item" role="presentation">
+        //         <h3 className="spectrum-Accordion-itemHeading">
+        //             <button className="spectrum-Accordion-itemHeader" type="button" id="spectrum-accordion-item-2-header" aria-controls="spectrum-accordion-item-2-content" aria-expanded="false">Nature</button>
+        //             <span className="spectrum-Accordion-itemIconContainer">
+        //                 <svg className="spectrum-Icon spectrum-UIIcon-ChevronRight75 spectrum-Accordion-itemIndicator" focusable="false" aria-hidden="true">
+        //                     <use xlinkHref="#spectrum-css-icon-Chevron75" />
+        //                 </svg>
+        //             </span>
+        //         </h3>
+        //         <div className="spectrum-Accordion-itemContent" role="region" id="spectrum-accordion-item-2-content" aria-labelledby="spectrum-accordion-item-2-header">NATURE IS METAL BABE</div>
+        //     </div>
+        //     <div className="spectrum-Accordion-item" role="presentation">
+        //         <h3 className="spectrum-Accordion-itemHeading">
+        //             <button className="spectrum-Accordion-itemHeader" type="button" id="spectrum-accordion-item-3-header" aria-controls="spectrum-accordion-item-3-content" aria-expanded="false">Really Long Accordion Item According to Our Predictions</button>
+        //             <span className="spectrum-Accordion-itemIconContainer">
+        //                 <svg className="spectrum-Icon spectrum-UIIcon-ChevronRight75 spectrum-Accordion-itemIndicator" focusable="false" aria-hidden="true">
+        //                     <use xlinkHref="#spectrum-css-icon-Chevron75" />
+        //                 </svg>
+        //             </span>
+        //         </h3>
+        //         <div className="spectrum-Accordion-itemContent" role="region" id="spectrum-accordion-item-3-content" aria-labelledby="spectrum-accordion-item-3-header">Item 4</div>
+        //     </div>
+        // </div>
+
+
+
+
+
+
+  // const initialNodes = [
+  //   { id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
+  //   { id: '2', position: { x: 0, y: 100 }, data: { label: '2' } },
+  // ];
+  // const initialNodes = () => {
+  //   if (1+1 == 6) {
+  //     return (
+  //       [
+  //         {
+  //           id: 1,
+  //           type: 'question',
+  //           data: { label: `Question`, product1: '', product2: '' },
+  //           position: { x: 150, y: 100 },
+  //         }, 
+  //         {
+  //           id: 2,
+  //           type: 'question',
+  //           data: { label: `question 2` },
+  //           position: { x: 450, y: 300 },
+  //         },
+  //       ]        
+  //       // console.log('nothing is real')
+  //     )
+  //   } else {
+  //     return nodes;
+  //   }
+  // }
+
+
+  // const nodeTypes = {
+        //   question: (props) => <QuestionNode {...props} updateNodeData={handleUpdateNodeData} />,
+        //   option: (props) => <OptionNode {...props} updateNodeData={handleUpdateNodeData} />,
+        // };
