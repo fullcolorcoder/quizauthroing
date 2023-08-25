@@ -1,6 +1,4 @@
 /* eslint-disable react/display-name */
-
-
 import React, { memo } from 'react';
 import { Handle, Position, useStore } from 'reactflow';
 import '@spectrum-web-components/textfield/sp-textfield.js';
@@ -24,13 +22,13 @@ const QuestionNode = memo(({ id, data, isConnectable }) => {
     <>
      <div className="question">
         <Handle type="target" position={Position.Top} style={{ background: 'none' }} isConnectable={isConnectable} />
-        <div style={{ height: '400px', width: '400px', padding: '20px', background: 'rgb(29, 29, 29, 0.8)', border: '1px solid #rgb(29, 29, 29)' }}>
-            <h3 className="spectrum-Heading spectrum-Heading--sizeM">{ id } </h3>
+        <div style={{ height: '300px', width: '400px', padding: '20px', background: 'rgb(29, 29, 29, 0.5)', border: '1px solid #rgb(29, 29, 29)', borderRadius: '15px' }}>
+            <h3 className="spectrum-Heading spectrum-Heading--sizeM">Question </h3>
             <div className="spectrum-Form-item">
                 <sp-field-label class="spectrum-FieldLabel spectrum-FieldLabel--sizeM spectrum-Form-itemLabel spectrum-FieldLabel--right" for="node-q-id">Question ID</sp-field-label>
                     <div className="spectrum-Form-itemField">
                     <div className="spectrum-Textfield">
-                        <sp-textfield id="node-q-id" placeholder="q-photo"></sp-textfield>
+                        <sp-textfield id="node-q-id" placeholder="q-photo" ></sp-textfield>
                     </div>
                 </div>
             </div>
@@ -38,7 +36,7 @@ const QuestionNode = memo(({ id, data, isConnectable }) => {
                 <sp-field-label class="spectrum-FieldLabel spectrum-FieldLabel--sizeM spectrum-Form-itemLabel spectrum-FieldLabel--right" for="node-q-title">Title</sp-field-label>
                     <div className="spectrum-Form-itemField">
                     <div className="spectrum-Textfield">
-                        <sp-textfield id="node-q-title" placeholder="q-title"></sp-textfield>
+                        <sp-textfield id="node-q-title" placeholder="What do you want to do today?"></sp-textfield>
                     </div>
                 </div>
             </div>
@@ -46,10 +44,29 @@ const QuestionNode = memo(({ id, data, isConnectable }) => {
                 <sp-field-label class="spectrum-FieldLabel spectrum-FieldLabel--sizeM spectrum-Form-itemLabel spectrum-FieldLabel--right" for="node-q-subtitle">Subtitle</sp-field-label>
                     <div className="spectrum-Form-itemField">
                     <div className="spectrum-Textfield">
-                        <sp-textfield id="node-q-subtitle" placeholder="q-photo"></sp-textfield>
+                        <sp-textfield id="node-q-subtitle" placeholder="Pick up to 3"></sp-textfield>
                     </div>
                 </div>
             </div>
+
+            <div className="spectrum-Form-item">
+                <sp-field-label class="spectrum-FieldLabel spectrum-FieldLabel--sizeM spectrum-Form-itemLabel spectrum-FieldLabel--right" for="node-q-btn">Button Label</sp-field-label>
+                    <div className="spectrum-Form-itemField">
+                    <div className="spectrum-Textfield">
+                        <sp-textfield id="node-q-btn" placeholder="Next"></sp-textfield>
+                    </div>
+                </div>
+            </div>         
+
+
+            <div className="spectrum-Form-item">
+                <sp-field-label class="spectrum-FieldLabel spectrum-FieldLabel--sizeM spectrum-Form-itemLabel spectrum-FieldLabel--right" for="node-q-imagebg">Background Image URL</sp-field-label>
+                    <div className="spectrum-Form-itemField">
+                    <div className="spectrum-Textfield">
+                        <sp-textfield id="node-q-imagebg" placeholder="https://"></sp-textfield>
+                    </div>
+                </div>
+            </div>                        
 
             <div className="spectrum-Form-item">
                 <label className="spectrum-FieldLabel spectrum-FieldLabel--sizeM spectrum-Form-itemLabel spectrum-FieldLabel--left" htmlFor="node-q-min-sel">Min Selections</label>
@@ -72,9 +89,16 @@ const QuestionNode = memo(({ id, data, isConnectable }) => {
                 </div>
                 </div>
             </div>
+
+            <div className="spectrum-Form-item">
+                <sp-field-label class="spectrum-FieldLabel spectrum-FieldLabel--sizeM spectrum-Form-itemLabel spectrum-FieldLabel--right" for="node-q-footerFrag">Footer Fragment URL</sp-field-label>
+                    <div className="spectrum-Form-itemField">
+                    <div className="spectrum-Textfield">
+                        <sp-textfield id="node-q-footerFrag" placeholder="https://"></sp-textfield>
+                    </div>
+                </div>
+            </div>
         </div>
-
-
         <Handle type="source" position={Position.Bottom} style={{ background: '#555' }} isConnectable={isConnectable} />
     </div>
     </>
@@ -82,84 +106,3 @@ const QuestionNode = memo(({ id, data, isConnectable }) => {
 });
 
 export default QuestionNode;
-
-
-
-// import { memo } from 'react';
-// import { Handle, Position } from 'reactflow';
-
-// const QuestionNode = memo(({ id, data, updateNodeData, isConnectable }) => {
-//   return (
-//     <>
-//       <Handle type="target" position={Position.Top} style={{ background: '#555' }} />
-//       <div style={{ height: '200px', width: '400px', padding: '10px', background: '#fff', border: '10px solid #000' }}>
-//         <div>Question Node</div>
-//       </div>
-//       <Handle type="source" position={Position.Bottom} style={{ background: '#555' }} />
-//     </>
-//   );
-// });
-
-// export default QuestionNode;
-
-
-
-// import React, { memo } from 'react';
-// import { Handle } from 'reactflow';
-
-// const QuestionNode = ({ id, data, updateNodeData, isConnectable }) => {
-
-// // const QuestionNode = memo(({ id, data, updateNodeData, isConnectable }) => {
-//     // const handleInputChange = (event, key) => {
-//     //   event.stopPropagation();
-//     //   const newData = {
-//     //     ...data,
-//     //     [key]: event.target.value,
-//     //   };
-//     //   updateNodeData(id, newData);
-//     // };
-  
-//     return (
-//       <div style={{ height: '200px', width: '400px', padding: '10px', background: '#fff', border: '10px solid #000' }}>
-//         <Handle type="target" position="top" style={{ background: '#555' }} />
-//         <div>Question Node</div>
-//         <Handle type="source" position="bottom" style={{ background: '#555' }} />
-//       </div>
-//     );
-//   // });
-//     };
-
-// // const QuestionNode = ({ id, data, updateNodeData }) => {
-// //     const [localData, setLocalData] = React.useState(data);
-// //     const handleInputChange = (event, key) => {
-// //         event.stopPropagation(); // Add this line
-      
-// //         const newData = {
-// //           ...data,
-// //           [key]: event.target.value,
-// //         };
-// //         updateNodeData(id, newData);
-// //       };  
-// //     // const handleInputChange = (event, key) => {
-// //     //   setLocalData({
-// //     //     ...localData,
-// //     //     [key]: event.target.value,
-// //     //   });
-// //     // };
-  
-// //     // const handleBlur = () => {
-// //     //   updateNodeData(id, localData);
-// //     // };
-  
-// //     return (
-// //       <div style={{ height: '200px', width: '400px', padding: '10px', background: '#fff', border: '10px solid #000' }}>
-// //         <Handle type="target" position="top" style={{ background: '#555' }} />
-// //         <div>Question Node</div>
-// //       <div>
-// //       </div>
-// //       <Handle type="source" position="bottom" style={{ background: '#555' }} />
-// //     </div>
-// //   );
-// // };
-
-// export default QuestionNode;

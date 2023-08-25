@@ -1,6 +1,7 @@
 import '@spectrum-web-components/accordion/sp-accordion.js';
 import '@spectrum-web-components/accordion/sp-accordion-item.js';
 import '@spectrum-css/fieldlabel/dist/index.css';
+import './Sidebar.css'
 
 const Sidebar = ({ addQuestion, exportData }) => {
 
@@ -12,34 +13,57 @@ const Sidebar = ({ addQuestion, exportData }) => {
                 <h1 className="spectrum-Heading spectrum-Heading--sizeXS">Quiz Authoring Tool</h1>
             </div>
 
+            {/* <h2 className="spectrum-Heading spectrum-Heading--sizeXS">Import Existing Data</h2><br /> */}
+        
+
             <sp-accordion>
-                <sp-accordion-item label="Heading 1">
-                    <div>Item 1</div>
+                <sp-accordion-item label="Import Existing Data">
+                    <div>
+
+                    <div className="spectrum-Form-item">
+                <sp-field-label class="spectrum-FieldLabel spectrum-FieldLabel--sizeM spectrum-Form-itemLabel spectrum-FieldLabel--right" for="node-optionTitle">Strings</sp-field-label>
+                    <div className="spectrum-Form-itemField">
+                    <div className="spectrum-Textfield">
+                        <sp-textfield id="node-optionTitle" placeholder="https://" ></sp-textfield>
+                    </div>
+                </div>
+            </div>
+
+            <div className="spectrum-Form-item">
+                <sp-field-label class="spectrum-FieldLabel spectrum-FieldLabel--sizeM spectrum-Form-itemLabel spectrum-FieldLabel--right" for="node-optionTitle">Questions</sp-field-label>
+                    <div className="spectrum-Form-itemField">
+                    <div className="spectrum-Textfield">
+                        <sp-textfield id="node-optionTitle" placeholder="https://" ></sp-textfield>
+                    </div>
+                </div>
+            </div>
+
+            <div className="spectrum-Form-item">
+                <sp-field-label class="spectrum-FieldLabel spectrum-FieldLabel--sizeM spectrum-Form-itemLabel spectrum-FieldLabel--right" for="node-optionTitle">Results</sp-field-label>
+                    <div className="spectrum-Form-itemField">
+                    <div className="spectrum-Textfield">
+                        <sp-textfield id="node-optionTitle" placeholder="https://" ></sp-textfield>
+                    </div>
+                </div>
+            </div>                            
+                    </div>
                 </sp-accordion-item>
-                <sp-accordion-item disabled label="Heading 2">
-                    <div>Item 2</div>
+                <sp-accordion-item label="Build New Quiz">
+                    <div>
+                        <button className="spectrum-Button spectrum-Button--fill spectrum-Button--primary spectrum-Button--sizeS" onClick={addQuestion}>
+                            <span className="spectrum-Button-label">Add Question</span>
+                        </button>                        
+                    </div>
                 </sp-accordion-item>
-                <sp-accordion-item label="Heading 3">
-                    <div>Item 3</div>
-                </sp-accordion-item>
-                <sp-accordion-item label="Heading 4">
-                    <div>Item 4</div>
-                </sp-accordion-item>
-                <sp-accordion-item label="Heading 5">
-                    <div>Item 5</div>
-                </sp-accordion-item>
-                <sp-accordion-item label="Heading 6">
-                    <div>Item 6</div>
-                </sp-accordion-item>
+                <sp-accordion-item label="Export Quiz">
+                    <div>
+                        <button className="spectrum-Button spectrum-Button--fill spectrum-Button--primary spectrum-Button--sizeS" onClick={exportData}>
+                            <span className="spectrum-Button-label">Export Quiz</span>
+                        </button>                        
+                    </div>
+                </sp-accordion-item>                
             </sp-accordion>
-
-            <button className="spectrum-Button spectrum-Button--fill spectrum-Button--primary spectrum-Button--sizeS" onClick={addQuestion}>
-                <span className="spectrum-Button-label">Add Question</span>
-            </button>
-
-            <button className="spectrum-Button spectrum-Button--fill spectrum-Button--primary spectrum-Button--sizeS" onClick={exportData}>
-                <span className="spectrum-Button-label">Export Quiz</span>
-            </button>
+<br />
 
         </aside>
     )

@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useMemo } from 'react';
+import React, { useState, useCallback, useRef, useMemo } from 'react';
 import ReactFlow, {
   addEdge,
   useNodesState,
@@ -11,6 +11,7 @@ import ReactFlow, {
   applyNodeChanges,
 } from 'reactflow';
 import QuestionNode from './QuestionNode';
+import OptionNode from './OptionNode';
 import Sidebar from './Sidebar';
 
 import '@spectrum-css/vars/dist/spectrum-global.css';
@@ -34,11 +35,16 @@ let id = 1;
 const getId = () => `node${id++}`;
 
 const QuizEditor = () => {
-  const nodeTypes = useMemo(() => ({ question: QuestionNode }), []);
+  const nodeTypes = useMemo(() => ({ 
+    question: QuestionNode,
+    option: OptionNode,
+  }), []);
 
   const reactFlowWrapper = useRef(null);
   const connectingNodeId = useRef(null);
-  const [nodes, setNodes] = useNodesState([]);
+  const [customNodeId, setCustomNodeId] = useState(null);
+
+const [nodes, setNodes] = useNodesState([]);
   const [edges, setEdges] = useEdgesState([]);
   const { project } = useReactFlow();
 
@@ -49,12 +55,18 @@ const QuizEditor = () => {
   //     )
   //   );
   // };
-
+  
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
   const onNodesChange = useCallback( (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),[] );
   const onEdgesChange = useCallback( (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),[] );
 
-  const onConnectStart = useCallback((_, { nodeId }) => {
+  
+const handleCustomNodeIdChange = (newId) => {
+    setCustomNodeId(newId);
+};
+
+
+const onConnectStart = useCallback((_, { nodeId }) => {
     connectingNodeId.current = nodeId;
   }, []);
 
@@ -80,7 +92,7 @@ const QuizEditor = () => {
   );
 
   const addQuestion = () => {
-    const newId = getId();
+    const newId = customNodeId || getId();
     const newNode = {
       id: newId,
       type: 'question',
@@ -102,7 +114,6 @@ const QuizEditor = () => {
     const json = JSON.stringify(quiz, null, 2);
     console.log(json);
   };
-
 
   return (
     <div className="wrapper flex" ref={reactFlowWrapper} style={{ height: '100vh' }}>

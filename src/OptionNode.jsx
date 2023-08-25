@@ -11,15 +11,49 @@ const OptionNode = ({ id, data, updateNodeData }) => {
   };
 
   return (
-    <div style={{ border: '10px solid green' }}>
-      <Handle type="target" position="top" style={{ background: '#555' }} />
-      <div>Option Node</div>
-      {/* <input
-        type="text"
-        className=""
-        value={data.label}
-        onChange={handleInputChange}
-      /> */}
+    <div style={{ height: '200px', width: '400px', padding: '20px', background: 'rgb(107, 3, 106, 0.8)', border: '1px solid #rgb(29, 29, 29)', borderRadius: '15px' }}>
+    <Handle type="target" position="top" style={{ background: '#555' }} />
+      <h3 className="spectrum-Heading spectrum-Heading--sizeM">Option </h3>
+      <div className="spectrum-Form-item">
+          <sp-field-label class="spectrum-FieldLabel spectrum-FieldLabel--sizeM spectrum-Form-itemLabel spectrum-FieldLabel--right" for="node-optionID">Option ID</sp-field-label>
+              <div className="spectrum-Form-itemField">
+              <div className="spectrum-Textfield">
+                  <sp-textfield id="node-optionID" placeholder="optionid" ></sp-textfield>
+              </div>
+          </div>
+      </div>      
+      <div className="spectrum-Form-item">
+          <sp-field-label class="spectrum-FieldLabel spectrum-FieldLabel--sizeM spectrum-Form-itemLabel spectrum-FieldLabel--right" for="node-optionTitle">Title</sp-field-label>
+              <div className="spectrum-Form-itemField">
+              <div className="spectrum-Textfield">
+                  <sp-textfield id="node-optionTitle" placeholder="Option Title" ></sp-textfield>
+              </div>
+          </div>
+      </div>
+      <div className="spectrum-Form-item">
+          <sp-field-label class="spectrum-FieldLabel spectrum-FieldLabel--sizeM spectrum-Form-itemLabel spectrum-FieldLabel--right" for="node-optionText">Text</sp-field-label>
+              <div className="spectrum-Form-itemField">
+              <div className="spectrum-Textfield">
+                  <sp-textfield id="node-optionText" placeholder="Option Text" ></sp-textfield>
+              </div>
+          </div>
+      </div>
+      <div className="spectrum-Form-item">
+          <sp-field-label class="spectrum-FieldLabel spectrum-FieldLabel--sizeM spectrum-Form-itemLabel spectrum-FieldLabel--right" for="node-optionImage">Image URL</sp-field-label>
+              <div className="spectrum-Form-itemField">
+              <div className="spectrum-Textfield">
+                  <sp-textfield id="node-optionImage" placeholder="https://" ></sp-textfield>
+              </div>
+          </div>
+      </div>
+      <div className="spectrum-Form-item">
+          <sp-field-label class="spectrum-FieldLabel spectrum-FieldLabel--sizeM spectrum-Form-itemLabel spectrum-FieldLabel--right" for="node-optionCover">Cover Image URL</sp-field-label>
+              <div className="spectrum-Form-itemField">
+              <div className="spectrum-Textfield">
+                  <sp-textfield id="node-optionCover" placeholder="https://" ></sp-textfield>
+              </div>
+          </div>
+      </div>
       <Handle type="source" position="bottom" style={{ background: '#555' }} />
     </div>
   );
