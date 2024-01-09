@@ -15,8 +15,8 @@ const QuestionNode = memo(({ id, data, isConnectable }) => {
     };
   });
 
-  console.log(id, " id");
-  console.log(data, " data");
+//   console.log(id, " id");
+//   console.log(data, " data");
 
   return (
     <>
@@ -99,10 +99,11 @@ const QuestionNode = memo(({ id, data, isConnectable }) => {
                 </div>
             </div>
         </div>
-        <Handle type="source" position={Position.Bottom} style={{ background: '#555' }} isConnectable={isConnectable} />
+        <Handle id="green" type="source" position={Position.Bottom} style={{ background: 'green' }} isConnectable={isConnectable} />
+        <Handle id="red" type="source" position={Position.Right} style={{ background: 'red' }} isConnectable={isConnectable} />
     </div>
     </>
   );
 });
 
-export default QuestionNode;
+export default memo(QuestionNode);

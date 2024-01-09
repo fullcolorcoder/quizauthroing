@@ -1,7 +1,7 @@
-import React from 'react';
-import { Handle } from 'reactflow';
+import React, { memo } from 'react';
+import { Handle, Position } from 'reactflow';
 
-const OptionNode = ({ id, data, updateNodeData }) => {
+const OptionNode = ({ id, data, updateNodeData, isConnectable }) => {
   const handleInputChange = (event) => {
     const newData = {
       ...data,
@@ -12,7 +12,7 @@ const OptionNode = ({ id, data, updateNodeData }) => {
 
   return (
     <div style={{ height: '200px', width: '400px', padding: '20px', background: 'rgb(107, 3, 106, 0.8)', border: '1px solid #rgb(29, 29, 29)', borderRadius: '15px' }}>
-    <Handle type="target" position="top" style={{ background: '#555' }} />
+    <Handle type="target" position="top" style={{ background: '' }} />
       <h3 className="spectrum-Heading spectrum-Heading--sizeM">Option </h3>
       <div className="spectrum-Form-item">
           <sp-field-label class="spectrum-FieldLabel spectrum-FieldLabel--sizeM spectrum-Form-itemLabel spectrum-FieldLabel--right" for="node-optionID">Option ID</sp-field-label>
@@ -54,9 +54,16 @@ const OptionNode = ({ id, data, updateNodeData }) => {
               </div>
           </div>
       </div>
-      <Handle type="source" position="bottom" style={{ background: '#555' }} />
+<Handle
+  type="source"
+  position={Position.Bottom}
+  id="red" // This is the handle ID that will be used in the CustomConnectionLine
+  style={{ background: 'red' }}
+  isConnectable={isConnectable}
+/>      
+      {/* <Handle id="red" type="source" position={Position.Right} style={{ background: 'red' }} isConnectable={isConnectable} /> */}
     </div>
   );
 };
 
-export default OptionNode;
+export default memo(OptionNode);

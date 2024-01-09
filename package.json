@@ -24,7 +24,8 @@
     "@spectrum-web-components/textfield": "^0.35.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "reactflow": "^11.7.4"
+    "reactflow": "^11.10.1",
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
